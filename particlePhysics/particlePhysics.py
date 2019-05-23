@@ -33,8 +33,6 @@ with open(fp) as file:
             print(m1pt, m1eta, m1phi, m1mass)
             print(m2pt, m2eta, m2phi, m2mass)
 
-        input(' ')
-
 
 
 
