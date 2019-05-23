@@ -6,7 +6,7 @@ allValuesSet = False
 with open(fp) as file:
     for i, line in enumerate(file):
         if line.startswith('Run'):
-            identifier = line
+            identifier = line.strip()
             currentLine = i
             allValuesSet = False
         elif i == currentLine + 2:
@@ -33,7 +33,7 @@ with open(fp) as file:
             print(m1pt, m1eta, m1phi, m1mass)
             print(m2pt, m2eta, m2phi, m2mass)
 
-        input( ' ')
+        input(' ')
 
 
 
