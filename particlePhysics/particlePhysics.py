@@ -1,34 +1,17 @@
-import math
-
-SPEED_OF_LIGHT = 299792458
+from Muon import Muon
+from Event import Event
 
 fp = 'muons.txt'
 m1string = ''
 m2string = ''
 allValuesCorrect = False
 
-def calculate4Vector(pt, eta, phi, mass):
-
-    # calculate px, py, pz
-    px = (pt * math.cos(phi))
-    py = (pt * math.sin(phi))
-    pz = (pt * math.sinh(eta))
-
-    # do pythag theorem to get magnitude of the momentum
-    magnitude = math.sqrt(px**2 + py**2 + pz**2)
-
-    # calculate energy
-    energy = math.sqrt(mass**2 + magnitude**2)
-
-    # create 4-vector
-    fourVector = ((energy/SPEED_OF_LIGHT), px, py, pz)
-
-    # return 4-vector
-    return (fourVector, magnitude)
-
-def calculateInvariantMass(m1fourVector, m2fourVector):
-    return
-
+def writeInvMassToLine(eventObj:Event):
+    f = open('invariantMass.txt', 'a')  #create new text file and write identifier and invMass to it
+    f.write(eventObj.identifier + '\n')
+    f.write('Invariant Mass: ' + str(eventObj.getInvariantMass()) + '\n')
+    f.write('\n')
+    f.close()
 
 # open file
 with open(fp) as file:
@@ -59,9 +42,16 @@ with open(fp) as file:
             m2phi = float(split_m2[4])
             m2mass = float(split_m2[5])
 
-            # print(calculate4Vector(m1pt, m1eta, m1phi, m1mass))
-            # print(calculate4Vector(m2pt, m2eta, m2phi, m2mass))
-            # print('')
+            # create muon and event objects
+
+            muon1 = Muon(m1pt, m1eta, m1phi, m1mass)
+            muon2 = Muon(m2pt, m2eta, m2phi, m2mass)
+
+            event = Event(muon1, muon2, identifier)
+
+            writeInvMassToLine(event)
+
+
 
 
 
